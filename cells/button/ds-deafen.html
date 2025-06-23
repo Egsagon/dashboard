@@ -1,0 +1,13 @@
+<div class="cell-button-ds-deafen">
+    <div>
+        <button class="button"><i class="fa-solid fa-headset"></i></button>
+    </div>
+</div>
+
+<script>
+    document.querySelector('.cell-button-ds-deafen button').onclick = () => {
+        exec('& "C:/Program Files/AutoHotkey/v2/AutoHotkey.exe" scripts/key.ahk "!b"', (code, response) => {
+            if (code !== 0 && response) return console.error(`Error ${code}: ${response}`)
+        })
+    }
+</script>

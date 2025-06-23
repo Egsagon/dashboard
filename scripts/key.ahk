@@ -1,0 +1,1 @@
+Send(A_Args[1])

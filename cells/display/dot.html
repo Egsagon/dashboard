@@ -1,0 +1,40 @@
+<div class="cell-display-dot">
+    <div>
+        <div></div>
+    </div>
+</div>
+
+<style>
+    .cell-display-dot div div {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background-color: var(--foreground);
+        animation: pulse forwards 3s;
+    }
+
+    @keyframes pulse {
+        from {scale: 2;}
+        to {scale: 1;}
+    }
+</style>
+
+<script>
+    const dot = document.querySelector('.cell-display-dot div div')
+    const dot_pulse_frequency = 4 // every 2 hits
+
+    var dot_pulse_counter = 0
+
+    socket.onAny(() => {
+
+        // Increment counter
+        dot_pulse_counter ++
+        if (dot_pulse_counter < dot_pulse_frequency) return
+        dot_pulse_counter = 0
+
+        // Reset animation
+        dot.style.animation = 'none'
+        dot.offsetHeight
+        dot.style.animation = null
+    })
+</script>

@@ -1,0 +1,68 @@
+<div class="cell-ru-keyboard">
+    <div>
+        <button class="button">Caps</button>
+    </div>
+</div>
+
+<style>
+    .cell-ru-keyboard button, .ru-key button {
+        font-size: 4vw;
+    }
+
+    .ru-key {
+        aspect-ratio: 1 / 2;
+        grid-row: span 2;
+    }
+
+    .ru-key button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .ru-key button p {
+        margin: 0;
+    }
+
+    .ru-key span {
+        font-size: 2vw;
+        color: var(--tiercary);
+        margin-top: 20px;
+    }
+</style>
+
+<script>
+    const alphabet = [
+        ['А', 'a'], ['Б', 'b'], ['В', 'v'], ['Г', 'g'], ['Д', 'd'], ['Е', 'ié'],
+        ['Ж', 'j'], ['З', 'z'], ['И', 'i'], ['К', 'k'], ['Л', 'l'], ['М', 'm'],
+        ['Н', 'n'], ['О', 'o'], ['П', 'p'], ['Р', 'r'], ['С', 's'], ['Т', 't'],
+        ['У', 'ou'], ['Ф', 'f'], ['Х', 'hr'], ['Ц', 'ts'], ['Ч', 'tch'], ['Ш', 'ch'],
+        ['Щ', 'chi'], ['Ы', 'eu'], ['Э', 'è'], ['Ю', 'you'], ['Я', 'ia'], ['Ь', '-'],
+        ['Ъ', '+'], ['_', '_']
+    ]
+
+    for (const [letter, pron] of alphabet) {
+        const cell = document.createElement('div')
+        cell.classList.add('ru-key')
+        cell.innerHTML = `<div><button class="button"> <p>${letter}</p><br><span>${pron}</span></button></div>`
+        document.body.appendChild(cell)
+    }
+
+    document.querySelectorAll('.ru-key button').forEach(key => key.addEventListener('click', () => {
+        let letter = key.querySelector('p').innerHTML
+        exec(`& "C:/Program Files/AutoHotkey/v2/AutoHotkey.exe" scripts/key.ahk "${letter}"`, (code, response) => {
+            if (code !== 0 && response) return console.error(`Error ${code}: ${response}`)
+        })
+    }))
+
+    document.querySelector('.cell-ru-keyboard button').onclick = () => {
+        for (const key of document.querySelectorAll('.ru-key button p')) {
+            let lower = key.innerHTML.toLowerCase()
+            if (key.innerHTML === lower)
+                key.innerHTML = key.innerHTML.toUpperCase()
+            else
+                key.innerHTML = lower
+        }
+    }
+</script>
