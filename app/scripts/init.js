@@ -3,12 +3,13 @@
 const socket = io()
 const polls = {}
 
+// Poll hook
 const poll = (command, callback) => {
-    // Poll hooker
-    // Defined here so all modules can access it at runtime
-
     polls[Object.keys(polls).length] = {'command': command, 'callback': callback}
 }
+
+// Command hook
+const exec = (command, callback) => socket.emit('exec', command, callback)
 
 // Apply grid width
 const width = config.boards[board]?.width || config.width

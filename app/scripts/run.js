@@ -13,23 +13,20 @@ for (let i = 0; i < config.boards[board].modules.length; i++) {
     cell.style.aspectRatio = `${sx} / ${sy}`
 }
 
-// Handle connections
-const loader = document.querySelector('#loader')
-socket.on('connect', () => {
-    socket.emit('start', polls)
-})
-
-// Handle disconnections
-socket.on('disconnect', () => loader.style.display = 'flex')
-
-// Hook commands
-const exec = (command, callback) => socket.emit('exec', command, callback)
-
 // Handle server poll receptions
 socket.on('poll', data => {
     loader.style.display = 'none'
     for (const [id, result] of Object.entries(data))
         polls[id].callback(...result)
+})
+
+// Handle disconnections
+socket.on('disconnect', () => loader.style.display = 'flex')
+
+// Handle connections
+const loader = document.querySelector('#loader')
+socket.on('connect', () => {
+    socket.emit('start', polls)
 })
 
 // Ping server to stay alive

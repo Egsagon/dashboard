@@ -1,5 +1,5 @@
 <div class="cell-display-face">
-    <div><p></p></div>
+    <div><p class="glitch"></p></div>
 </div>
 
 <style>
@@ -12,20 +12,12 @@
 
 <script>
     const faces = {
-        sleep: ['₍ᐢ. .ᐢ₎', '"(っ- ‸ - ς)ᶻ 𝗓 𐰁', '/ᐠ - ˕ -マᶻ 𝗓 𐰁', 'ᶻ 𝗓 𐰁', 'ᓚ₍^- .-^₎'],
-        light: [
-            '>⩊<', '(ﾉ◕ヮ◕)ﾉ✧', '₍^. .^₎⟆', '＼(＾O＾)／', '\( ﾟヮﾟ)/', '(˶ᵔ ᵕ ᵔ˶)',
-            '( ´◔ ω◔`) ノシ', '(づ｡◕‿‿◕｡)づ', '(っᵔ◡ᵔ)っ', '⸜(｡˃ ᵕ ˂ )⸝♡', '( ˶ˆᗜˆ˵ )'
-        ],
-        medium: [
-            '(ㆆ_ㆆ)', '(≖_≖ )', '(ᵕ—ᴗ—)', '\_ (ᵕ—ᴗ—)_/¯', '(-_-)', 'ᗜ⩊ᗜ', '(⊙＿⊙\')'
-        ],
-        high: [
-            '(つ╥﹏╥)つ', '(๑﹏๑//)', '(˶˃⤙˂˶)', '(╯\'□\')╯', '(×_×)', '(ó﹏ò｡)', '(⊙＿⊙\')'
-        ]
+        sleep: ['ᓚ₍^- .-^₎', '₍ᐢ. .ᐢ₎', '>⩊<', '₍^. .^₎⟆', '(˶ᵔ ᵕ ᵔ˶)', '(っᵔ◡ᵔ)っ'],
+        light: ['>⩊<', ':)', '(っᵔ◡ᵔ)っ', '(˶˃⤙˂˶)', '＼(＾O＾)／', '\( ﾟヮﾟ)/'],
+        mean: ['>⩊<', '(≖_≖ )', '(ᵕ—ᴗ—)', '(-_-)', 'ᗜ⩊ᗜ', '(˶˃⤙˂˶)', '(っᵔ◡ᵔ)っ'],
+        high: ['>⩊<', '(つ╥﹏╥)つ', '(˶˃⤙˂˶)', '(×_×)', ':(', '(ó﹏ò｡)', '(ᵕ—ᴗ—)']
     }
 
-    const face_swap_interval = 30 * 1000
     const face_terminal = document.querySelector('.cell-display-face p')
 
     const apply_face = () => {
@@ -37,14 +29,16 @@
 
         let batch = faces.sleep
         if      (load > 70) batch = faces.high
-        else if (load > 55) batch = faces.medium
+        else if (load > 55) batch = faces.mean
         else if (load > 15) batch = faces.light
         if (load < 65 && (time >= 22 || time < 7)) batch = faces.sleep
 
         // Select random face from that batch
-        face_terminal.innerHTML = batch[Math.floor(Math.random() * batch.length)]
+        let face = batch[Math.floor(Math.random() * batch.length)]
+        face_terminal.title = face_terminal.innerHTML = face
+        face_terminal.style.fontSize = `min(calc(40vw / ${face.length}), 180px)`
     }
 
     apply_face()
-    setInterval(apply_face, face_swap_interval)
+    setInterval(apply_face, 40 * 1000)
 </script>

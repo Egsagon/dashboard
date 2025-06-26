@@ -66,9 +66,4 @@ def cleanup():
     if poll := polls.get(flask.request.sid):
         poll.stop()
 
-def run(host: str = None, port: int = None) -> None:
-    # Run the server
-
-    socket.run(app, host, port, debug = False, log_output = False)
-
 # EOF
