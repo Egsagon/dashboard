@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="assets/icon.svg">
+    <title>Dashboard</title>
+    <style>
+        * {
+            color: #fff;
+            font-family: monospace;
+        }
+
+        body {
+            background-color: #000;
+        }
+
+        input {
+            padding: 10px;
+            background-color: #141414;
+            border: none;
+            outline: none;
+            transition: all ease-in-out .1s;
+        }
+
+        input:hover, input:focus, input:active {
+            background-color: #1d1d1d;
+        }
+    </style>
+</head>
+<body>
+    <h1>This device is not connected (つ╥﹏╥)つ</h1>
+    <p>Enter configuration token to connect:</p>
+    <input type="password" placeholder="Password" autofocus onkeyup="submit(this)">
+
+    <script>
+        const submit = input => {
+            if (event.key !== 'Enter') return
+            document.cookie = `token=${input.value}; max-age=31536000`
+            location.href = '/'
+        }
+    </script>
+</body>
+</html>

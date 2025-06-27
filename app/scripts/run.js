@@ -11,6 +11,14 @@ for (let i = 0; i < config.boards[board].modules.length; i++) {
     cell.style.gridColumn = `${px} / span ${sx}`
     cell.style.gridRow = `${py} / span ${sy}`
     cell.style.aspectRatio = `${sx} / ${sy}`
+
+    // Inject config data to cell
+    cell.dataset.config = module.data
+}
+
+// Run locks
+for (const callback of Object.values(locks)) {
+    callback()
 }
 
 // Handle server poll receptions

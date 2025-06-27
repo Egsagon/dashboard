@@ -1,6 +1,7 @@
-Cool readme, uh?
-
 ## TODO
 
-- Mouse & keyboard battery harvest
-- Third link
+- Section 2 [timer + crono]
+- Section 3 [notifications]
+
+- Instant poll fetch
+- Cool gradient over all cells like bdv

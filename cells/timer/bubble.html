@@ -1,0 +1,25 @@
+<div class="cell-timer-bubble">
+    <div>
+        <button class="button"></button>
+    </div>
+</div>
+
+<style>
+    .cell-timer-bubble button {
+        font-size: 2vw;
+    }
+
+    .cell-timer-bubble button i {
+        margin-right: 10px;
+    }
+</style>
+
+<script>
+    // This is a bit overkill, maybe I should just move it in timer/header.html
+    qlock('.cell-timer-bubble', bubble => {
+        const button = bubble.querySelector('button')
+        const time = button.dataset.value = bubble.dataset.config
+        button.innerHTML = '<i class="fa-solid fa-clock-rotate-left"></i>' + timer.pretty(time)
+        button.onclick = () => {timer.start(time)}
+    })
+</script>

@@ -1,0 +1,85 @@
+<div class="cell-stat-temp">
+    <div>
+        <div class="ball"><div></div></div>
+        <div class="bar"><div></div></div>
+        <p>0°</p>
+    </div>
+</div>
+
+<style>
+    .cell-stat-temp > div {
+        flex-direction: column;
+    }
+
+    .cell-stat-temp p {
+        font-size: 2vw;
+        margin-top: 25px;
+        margin-bottom: 0;
+    }
+
+    .cell-stat-temp .ball {
+        width: 50px;
+        height: 50px;
+        border-radius: 50px;
+        background-color: var(--active);
+        overflow: hidden;
+    }
+
+    .cell-stat-temp .bar {
+        width: 20px;
+        border-radius: 0 0 10px 10px;
+        height: calc(100% - 160px);
+        background-color: var(--active);
+        overflow: hidden;
+        transform: translateY(-3px);
+    }
+
+    .cell-stat-temp .ball div {
+        width: 50px;
+        height: 0%;
+        border-radius: 0 0 2px 2px;
+        background-color: var(--foreground);
+        /*
+            Transition is cut but oh well
+            transition: height ease-in-out 1s 1s, background-color ease-in-out 1s;
+        */
+        transition: all ease-in-out 1s;
+    }
+
+    .cell-stat-temp .bar div {
+        width: 20px;
+        height: 0%;
+        border-radius: 0 0 10px 10px;
+        background-color: var(--foreground);
+        transition: all ease-in-out 1s;
+    }
+</style>
+
+<script>
+    const temp_cell = {
+        ball: document.querySelector('.cell-stat-temp .ball div').style,
+        bar: document.querySelector('.cell-stat-temp .bar div').style,
+        text: document.querySelector('.cell-stat-temp p')
+    }
+
+    poll('nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits', (code, response) => {
+        if (code !== 0) return console.error(`Error ${code}: ${response}`)
+
+        // ball: 20deg, bar: 80deg
+        temp_cell.text.innerHTML = response + '°'
+
+        if (response <= 20) {
+            temp_cell.ball.height = (response / 20) * 100 + '%'
+            temp_cell.bar.height = '0%'
+        }
+
+        else {
+            temp_cell.ball.height = '100%'
+            temp_cell.bar.height = ((response - 20) / 80) * 100 + '%'
+        }
+
+        let color = response > 85 ? '#dc143c' : (response > 75 ? '#dca314' : '#fff')
+        temp_cell.ball.backgroundColor = temp_cell.bar.backgroundColor = color
+    })
+
+</script>

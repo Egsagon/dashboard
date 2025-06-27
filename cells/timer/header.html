@@ -1,0 +1,127 @@
+<div class="cell-timer-header">
+    <div>
+        <p>Timer</p>
+
+        <button class="pause"><i class="fa-solid fa-play"></i></button>
+        <button class="restart"><i class="fa-solid fa-rotate-left"></i></button>
+    </div>
+</div>
+
+<style>
+    .cell-timer-header p {
+        margin-left: 25px;
+        flex-grow: 1;
+        font-size: 2vw;
+    }
+
+    .cell-timer-header button {
+        all: unset;
+        font-size: 2.5vw;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all ease-in-out .1s;
+        border-radius: 50%;
+    }
+
+    .cell-timer-header button:active {
+        background-color: var(--active);
+    }
+
+    .cell-timer-header button:last-child {
+        margin-right: 20px;
+    }
+</style>
+
+<script>
+    const timer = {
+        interval: null,
+        resolution: 1000,
+        value: {
+            current: 0,
+            end: 0,
+            paused: true
+        },
+        display: {
+            text: document.querySelector('.cell-timer-display p'),
+            circle: document.querySelector('.cell-timer-display svg')
+        },
+        update: function() {
+            // Update display
+
+            this.display.text.innerHTML = this.pretty(this.value.current).replace(/h|m|s/g, ':').slice(0, -1)
+            this.display.circle.style.setProperty('--timer-progress', (this.value.current / this.value.end) * 100)
+        },
+        tick: function() {
+            // Tick time
+
+            this.value.current = this.value.current - 1
+            this.update()
+            if (this.value.current <= 0) {this.stop()}
+        },
+        start: function(time) {
+            // Start timer
+
+            clearInterval(this.interval)
+            this.value.current = this.value.end = time
+            this.paused = false
+            this.update()
+            this.interval = setInterval(this.tick.bind(this), this.resolution)
+        },
+        stop: function() {
+            // Stop the timer and reset timer
+
+            clearInterval(this.interval)
+            this.value.current = 0
+            this.value.end = 0
+            this.paused = true
+            
+            // On end logic
+            this.update()
+        },
+        pause: function() {
+            // Toggle pausing timer
+
+            this.paused = !this.paused
+
+            if (this.paused) clearInterval(this.interval)
+            else this.interval = this.interval = setInterval(this.tick.bind(this), this.resolution)
+            this.update()
+
+            return this.paused
+        },
+        pretty: function(time) {
+            // Utlity to prettyfy a time
+
+            let h = Math.floor(time / 3600), m = Math.floor((time % 3600) / 60), s = time % 60
+
+            let parts = []
+            if (h) parts.push(`${h}h`);
+            if (m) parts.push(`${m}m`);
+            if (s || parts.length === 0) parts.push(`${s}s`);
+            return parts.join('')
+        }
+    }
+
+    // Bind header buttons
+    timer.update()
+
+    const timer_header = {
+        pause: document.querySelector('.cell-timer-header .pause'),
+        pause_i: document.querySelector('.cell-timer-header .pause i'),
+        restart: document.querySelector('.cell-timer-header .restart')
+    }
+
+    timer_header.pause.onclick = () => {
+        timer.pause()
+        timer_header.pause_i.classList.toggle('fa-play')
+        timer_header.pause_i.classList.toggle('fa-pause')
+    }
+
+    timer_header.restart.onclick = () => {
+        timer.stop()
+    }
+</script>

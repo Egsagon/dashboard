@@ -1,14 +1,14 @@
 # Boards configuration
+# This configuration is dynamic
 
 refresh_rate: 2.0
 default: main
 width: 8
 
-whitelist:
-  - 127.0.0.1
-  - 192.168.1.41
-  - 192.168.1.43
-  - 192.168.1.6
+# Change this to whatever you like,
+# Especially if you don't trust your
+# provider
+token: blob
 
 boards:
   main:
@@ -31,7 +31,7 @@ boards:
       - name: stat/net
         geometry: 2x2,7+3
       
-      - name: stat/disks
+      - name: stat/temp
         geometry: 2x4,1+5
       - name: display/face
         geometry: 4x4,3+5
@@ -51,18 +51,45 @@ boards:
       
       - name: link/home
         geometry: 2x2,1+11
-      - name: link/disks
+      - name: link/timer
         geometry: 2x2,3+11
       - name: link/russian
         geometry: 2x2,7+11
 
-  disks:
-    name: Disks
+  timer:
+    name: Timer
 
     modules:
+      - name: display/date
+        geometry: 8x2,1+1
+      
+      - name: timer/display
+        geometry: 4x4,5+3
+      - name: timer/header
+        geometry: 4x1,1+3
+      
+      - name: timer/bubble
+        geometry: 2x1,1+4
+        data: 30
+      - name: timer/bubble
+        geometry: 2x1,3+4
+        data: 60
+      - name: timer/bubble
+        geometry: 2x1,1+5
+        data: 600
+      - name: timer/bubble
+        geometry: 2x1,3+5
+        data: 1800
+      - name: timer/bubble
+        geometry: 2x1,1+6
+        data: 3600
+      - name: timer/bubble
+        geometry: 2x1,3+6
+        data: 7200
+      
       - name: link/home
         geometry: 2x2,1+11
-      - name: link/disks
+      - name: link/timer
         geometry: 2x2,3+11
       - name: link/russian
         geometry: 2x2,7+11
@@ -71,14 +98,13 @@ boards:
     name: Russian
 
     modules:
-
       - name: ru-header
         geometry: 6x2,1+1
       - name: ru-keyboard
         geometry: 2x2,7+1
       - name: link/home
         geometry: 2x2,1+11
-      - name: link/disks
+      - name: link/timer
         geometry: 2x2,3+11
       - name: link/russian
         geometry: 2x2,7+11

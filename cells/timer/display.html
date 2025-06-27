@@ -1,0 +1,64 @@
+<div class="cell-timer-display">
+    <div>
+        <svg width="250" height="250" viewBox="0 0 250 250">
+            <circle class="bg"></circle>
+            <circle class="fg"></circle>
+            <p>00:00</p>
+        </svg>
+    </div>
+</div>
+
+<style>
+    /* From www.30secondsofcode.org/css/s/circular-progress-bar */
+
+    @property --timer-progress {
+        syntax: "<number>";
+        inherits: false;
+        initial-value: 100;
+    }
+
+    .cell-timer-display > div {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .cell-timer-display svg {
+        margin: 20px;
+        --size: 100%;
+        --half-size: calc(var(--size) / 2);
+        --radius: calc((var(--size) - 12px) / 2);
+        --circumference: calc(var(--radius) * pi * 2);
+        --dash: calc((var(--timer-progress) * var(--circumference)) / 100);
+    }
+
+    .cell-timer-display svg circle {
+        cx: var(--half-size);
+        cy: var(--half-size);
+        r: var(--radius);
+        stroke-width: 12px;
+        fill: none;
+        stroke-linecap: round;
+    }
+    
+    .cell-timer-display .bg {
+        stroke: var(--active);
+    }
+
+    .cell-timer-display .fg {
+        transform: rotate(-90deg);
+        transform-origin: var(--half-size) var(--half-size);
+        stroke-dasharray: var(--dash) calc(var(--circumference) - var(--dash));
+        transition: stroke-dasharray 1s linear 0s;
+        stroke: #fff;
+    }
+
+    .cell-timer-display p {
+        position: absolute;
+        text-align: center;
+        font-size: 3.5vw;
+    }
+
+    .cell-timer-display span {
+        font-size: 2vw;
+    }
+</style>
