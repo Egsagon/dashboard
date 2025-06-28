@@ -41,7 +41,7 @@ styles:
     gradient: 'linear-gradient(-65deg, #fd575a, #fc8151, #f9b931, #f9b931)'
 
 # CSS variables to override
-css: *style-default
+css: *style-light
 
 boards:
   h:

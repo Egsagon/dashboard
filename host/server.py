@@ -19,7 +19,7 @@ def wss_auth(auth: str):
 def http_auth():
     # Check HTTP connections
 
-    allowed_pathes = ('/', '/auth', 'favicon.ico')
+    allowed_pathes = ('/', '/auth', '/assets/icon.svg')
 
     if flask.request.cookies.get('token') != utils.config['token'] and not flask.request.path in allowed_pathes:
         flask.abort(401)
