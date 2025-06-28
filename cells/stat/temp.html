@@ -78,7 +78,7 @@
             temp_cell.bar.height = ((response - 20) / 80) * 100 + '%'
         }
 
-        let color = response > 85 ? '#dc143c' : (response > 75 ? '#dca314' : '#fff')
+        let color = response > 85 ? '#dc143c' : (response > 75 ? '#dca314' : 'var(--foreground)')
         temp_cell.ball.backgroundColor = temp_cell.bar.backgroundColor = color
     })
 

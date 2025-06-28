@@ -26,7 +26,7 @@
 
         if (response === 0) {
             mouse_battery.innerHTML = 'Sleeping'
-            mouse_battery.style.color = '#fff'
+            mouse_battery.style.color = 'var(--foreground)'
             return
         }
 
@@ -34,6 +34,6 @@
     
         if (response < 40) mouse_battery.style.color = '#dca314'
         if (response < 20) mouse_battery.style.color = '#dc143c'
-        else mouse_battery.style.color = '#fff'
+        else mouse_battery.style.color = 'var(--foreground)'
     })
 </script>

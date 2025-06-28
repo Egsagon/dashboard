@@ -38,4 +38,9 @@ const exec = (command, callback) => socket.emit('exec', command, callback)
 const width = config.boards[board]?.width || config.width
 document.body.style.gridTemplateColumns = `repeat(${width}, 1fr)`
 
+// Apply CSS configuration
+for (const [key, value] of Object.entries(config.css)) {
+    document.documentElement.style. setProperty('--' + key, value)
+}
+
 // EOF

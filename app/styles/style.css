@@ -4,6 +4,7 @@
     --secondary: #141414;
     --tiercary: #7b7b7b;
     --active: #1d1d1d;
+    --gradient: none
 }
 
 * {
@@ -29,6 +30,10 @@ body > div {
 
 body > div > div {
     background-color: var(--secondary);
+    background-image: var(--gradient);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -10,6 +10,39 @@ width: 8
 # provider
 token: blob
 
+styles:
+  default: &style-default
+    background: '#1e1d24'
+    foreground: '#fff'
+    secondary: '#2b2a33'
+    tiercary: '#6c6c75'
+    active: '#4e4d55'
+  
+  oled: &style-oled
+    background: '#000'
+    foreground: '#fff'
+    secondary: '#141414'
+    tiercary: '#7b7b7b'
+    active: '#1d1d1d'
+  
+  light: &style-light
+    background: '#8a8a8a'
+    foreground: '#404040'
+    secondary: '#8f8f8f'
+    tiercary: '#575757'
+    active: '#707070'
+  
+  bdv: &style-bdv
+    background: '#18181a'
+    foreground: '#f8f8f2'
+    secondary: '#232327'
+    tiercary: '#6c6c75'
+    active: '#18181a'
+    gradient: 'linear-gradient(-65deg, #fd575a, #fc8151, #f9b931, #f9b931)'
+
+# CSS variables to override
+css: *style-default
+
 boards:
   h:
     name: Main
