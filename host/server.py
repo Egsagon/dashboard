@@ -21,8 +21,6 @@ def http_auth():
 
     allowed_pathes = ('/', '/auth', 'favicon.ico')
 
-    print(flask.request.path)
-
     if flask.request.cookies.get('token') != utils.config['token'] and not flask.request.path in allowed_pathes:
         flask.abort(401)
 
@@ -41,7 +39,7 @@ def serve():
         return flask.redirect('/auth')
 
     utils.refresh_config()
-    board = flask.request.args.get('board', utils.config['default'])
+    board = flask.request.args.get('b', utils.config['default'])
 
     if board not in utils.config['boards']:
         return flask.send_file('app/404.html')

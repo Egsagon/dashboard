@@ -23,6 +23,13 @@
 
     poll('python scripts/mouse.py', (code, response) => {
         if (code !== 0) return console.error(`Error ${code}: ${response}`)
+
+        if (response === 0) {
+            mouse_battery.innerHTML = 'Sleeping'
+            mouse_battery.style.color = '#fff'
+            return
+        }
+
         mouse_battery.innerHTML = response + '%'
     
         if (response < 40) mouse_battery.style.color = '#dca314'

@@ -1,0 +1,157 @@
+<div class="cell-crono-header">
+    <div>
+        <div id="header">
+            <p>Crono</p>
+            <button class="pause"></button>
+            <button class="lap"><i class="fa-solid fa-bookmark"></i></button>
+            <button class="restart"><i class="fa-solid fa-rotate-left"></i></button>
+        </div>
+
+        <div id="laps"></div>
+    </div>
+</div>
+
+<style>
+    .cell-crono-header > div {
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    .cell-crono-header > div > div {
+        width: 100%;
+    }
+
+    .cell-crono-header #header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 7px;
+    }
+
+    .cell-crono-header #header p {
+        flex-grow: 1;
+        font-size: 2vw;
+        margin-left: 25px;
+    }
+
+    .cell-crono-header #header button:last-child {
+        margin-right: 15px;
+    }
+
+    .cell-crono-header #laps {
+        flex-grow: 1;
+        border-top: 2px solid var(--active);
+        overflow-y: scroll;
+    }
+
+    .cell-crono-header #laps:empty:after {
+        content: 'No laps';
+        display: block;
+        text-align: center;
+        margin: 20px;
+        font-size: 2vw;
+    }
+
+    .cell-crono-header #laps div {
+        margin: 10px;
+        padding: 10px;
+        margin-bottom: 0;
+        padding-bottom: 20px;
+        font-size: 2vw;
+        border-bottom: 1px solid var(--active);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .cell-crono-header #laps div:last-child {
+        border-bottom: none;
+    }
+
+    .cell-crono-header button {
+        all: unset;
+        font-size: 2.5vw;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all ease-in-out .1s;
+        border-radius: 50%;
+        font-family: FontAwesome;
+    }
+
+    .cell-crono-header button:active {
+        background-color: var(--active);
+    }
+
+</style>
+
+<script>
+    const crono_pause = document.querySelector('.cell-crono-header .pause')
+    const crono_laps = document.querySelector('.cell-crono-header #laps')
+
+    const crono = {
+        interval: null,
+        resolution: 1000,
+        value: 0,
+        paused: true,
+        display: {
+            text: document.querySelector('.cell-crono-display p'),
+            circle: document.querySelector('.cell-crono-display svg')
+        },
+        update: function() {
+            // Update display
+
+            this.display.text.innerHTML = timer.pretty(this.value, true)
+            this.display.circle.style.setProperty('--crono-progress', (this.value % 60 / 60) * 100)
+            crono_pause.innerHTML = this.paused || !this.interval ? '' : ''
+        },
+        tick: function() {
+            // Tick time
+
+            this.value ++
+            this.update()
+        },
+        start: function() {
+            this.paused = false
+            this.interval = setInterval(this.tick.bind(this), this.resolution)
+        },
+        stop: function() {
+            // Stop crono
+
+            clearInterval(this.interval)
+            this.value = 0
+            this.paused = true
+            this.update()
+        },
+        pause: function() {
+            // Toggle pausing crono
+
+            this.paused = !this.paused
+
+            if (this.paused) clearInterval(this.interval)
+            else this.interval = setInterval(this.tick.bind(this), this.resolution)
+            this.update()
+
+            return this.paused
+        }
+    }
+
+    crono_pause.onclick = () => {
+        if (!crono.interval) return crono.start()
+        crono.pause()
+    }
+
+    document.querySelector('.cell-crono-header .lap').onclick = () => {
+        const lap_number = 1
+        const lap_time = timer.pretty(crono.value, true)
+        crono_laps.innerHTML += `<div>Lap ${lap_number} <span>${lap_time}</span></div>`
+    }
+
+    document.querySelector('.cell-crono-header .restart').onclick = () => {
+        crono.stop()
+        crono_laps.innerHTML = ''
+    }
+</script>
