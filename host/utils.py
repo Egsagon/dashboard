@@ -49,7 +49,9 @@ def run(command: str) -> list[int, str]:
             ['powershell', '-Command', command],
             stdout = subprocess.PIPE,
             stderr = subprocess.PIPE,
-            text = True
+            text = True,
+            # Not needed in normal execution, but useful with Task Scheduler
+            creationflags = subprocess.CREATE_NO_WINDOW
         )
 
         text = result.stdout if result.returncode <= 0 else result.stderr
