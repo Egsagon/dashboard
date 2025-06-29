@@ -1,6 +1,3 @@
-supzr daddy was here
-
-
 TODO
 
 - Readme
