@@ -1,3 +1,4 @@
+import re
 import time
 import json
 import yaml
@@ -39,7 +40,7 @@ def build(name: str) -> str:
     
     return page
 
-def run(command: str) -> list[int, str]:
+def _run(command: str) -> list[int, str]:
     '''
     Runs a shell command in a PS context.
     '''
@@ -50,7 +51,6 @@ def run(command: str) -> list[int, str]:
             stdout = subprocess.PIPE,
             stderr = subprocess.PIPE,
             text = True,
-            # Not needed in normal execution, but useful with Task Scheduler
             creationflags = subprocess.CREATE_NO_WINDOW
         )
 
@@ -59,6 +59,31 @@ def run(command: str) -> list[int, str]:
 
     except Exception as err:
         return [1, repr(err)]
+
+def run(command: str) -> list[int, str]:
+    '''
+    Wraps _run with caching behavior.
+    '''
+
+    cached = command.startswith('[cache')
+    frame = time.time()
+
+    if cached:
+        cache, command = re.findall(r'\[cache=(\d+?)\]\s?(.*)', command)[0]
+        capture = poll_cache.get(command)
+
+        if capture and frame - capture[0] < config['refresh_rate'] * int(cache):
+            return capture[1]
+    
+    if cached:
+        print('REFRESHING CACHE')
+
+    response = _run(command)
+
+    if cached:
+        poll_cache[command] = (frame, response)
+    
+    return response
 
 def poller(sid: str, tasks: dict[int, str], callback: callable) -> None:
     '''
@@ -109,6 +134,7 @@ logger = logging.getLogger('runner')
 config: dict = None
 refresh_config()
 
+poll_cache: dict[str, tuple[int, list[int, str]]] = {}
 polls: dict[str, eventlet.Event] = {}
 
 # EOF

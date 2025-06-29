@@ -5,6 +5,7 @@ TODO
 
 - Readme
 - Transform like button
-- Better timer end
-- Instant poll fetch
+
+- Cache system
+
 - Percentages in process list

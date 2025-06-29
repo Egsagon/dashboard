@@ -62,7 +62,7 @@
         text: document.querySelector('.cell-home-stats-temp p')
     }
 
-    poll('nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits', (code, response) => {
+    poll('[cache=25] nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits', (code, response) => {
         if (code !== 0) return console.error(`Error ${code}: ${response}`)
 
         // ball: 20deg, bar: 80deg

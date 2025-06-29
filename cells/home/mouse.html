@@ -22,7 +22,7 @@
     const mouse_icon = document.querySelector('.cell-home-mouse i')
     const mouse_battery = document.querySelector('.cell-home-mouse p')
 
-    poll('python scripts/mouse.py', (code, response) => {
+    poll('[cache=250] python scripts/mouse.py', (code, response) => {
         if (code !== 0) return console.error(`Error ${code}: ${response}`)
 
         if (response === 0) {
