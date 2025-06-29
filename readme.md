@@ -1,8 +1,2 @@
-TODO
-
-- Readme
+# TODO
 - Transform like button
-
-- Cache system
-
-- Percentages in process list
