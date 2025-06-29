@@ -22,6 +22,8 @@ const qlock = (query, callback) => {
     locks[query] = () => document.querySelectorAll(query).forEach(callback)
 }
 
+const zfill = (number, size = 2) => new String(number).padStart(size, '0')
+
 const socket = io({auth: {token: get_cookie('token')}})
 const polls = {}
 const locks = {}

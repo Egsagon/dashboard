@@ -64,6 +64,7 @@
 <script>
     const cpu_bar = document.querySelector('.cell-home-stats-cpu svg')
     const cpu_span = document.querySelector('.cell-home-stats-cpu span')
+    const cpu_fg = document.querySelector('.cell-home-stats-cpu .fg')
 
     poll('(Get-CimInstance -ClassName Win32_Processor).LoadPercentage', (code, usage) => {
         if (code !== 0) return console.error(`Error ${code}: ${usage}`)
@@ -72,9 +73,8 @@
         cpu_span.innerHTML = usage + '%'
 
         // Set span color
-        if (usage > 90) cpu_span.style.color = '#dc143c'
-        else if (usage > 70) cpu_span.style.color = '#dca314'
-        else cpu_span.style.color = 'var(--foreground)'
-
+        if (usage > 90) cpu_fg.style.stroke = '#dc143c'
+        else if (usage > 70) cpu_fg.style.stroke = '#dca314'
+        else cpu_fg.style.stroke = 'var(--foreground)'
     })
 </script>

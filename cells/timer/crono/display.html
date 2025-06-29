@@ -18,6 +18,11 @@
     .cell-timer-crono-display > div {
         display: flex;
         flex-direction: column;
+        transition: all ease-in-out .1s;
+    }
+
+    .cell-timer-crono-display > div:active {
+        background-color: var(--active);
     }
 
     .cell-timer-crono-display svg {

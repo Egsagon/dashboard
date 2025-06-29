@@ -139,7 +139,7 @@
         }
     }
 
-    crono_pause.onclick = () => {
+    crono_pause.onclick = document.querySelector('.cell-timer-crono-display').onclick = () => {
         if (!crono.interval) return crono.start()
         crono.pause()
     }

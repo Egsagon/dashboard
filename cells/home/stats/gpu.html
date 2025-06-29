@@ -64,6 +64,7 @@
 <script>
     const gpu_bar = document.querySelector('.cell-home-stats-gpu svg')
     const gpu_span = document.querySelector('.cell-home-stats-gpu span')
+    const gpu_fg = document.querySelector('.cell-home-stats-gpu .fg')
 
     poll('nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits', (code, usage) => {
         if (code !== 0) return console.error(`Error ${code}: ${usage}`)
@@ -72,9 +73,9 @@
         gpu_span.innerHTML = usage + '%'
 
         // Set span color
-        if (usage > 90) gpu_span.style.color = '#dc143c'
-        else if (usage > 70) gpu_span.style.color = '#dca314'
-        else gpu_span.style.color = 'var(--foreground)'
+        if (usage > 90) gpu_fg.style.stroke = '#dc143c'
+        else if (usage > 70) gpu_fg.style.stroke = '#dca314'
+        else gpu_fg.style.stroke = 'var(--foreground)'
 
     })
 </script>

@@ -64,6 +64,7 @@
 <script>
     const net_bar = document.querySelector('.cell-home-stats-net svg')
     const net_span = document.querySelector('.cell-home-stats-net span')
+    const net_fg = document.querySelector('.cell-home-stats-net .fg')
 
     poll("ping 1.1.1.1 -n 1", (code, usage) => {
         if (code !== 0) return console.error(`Error ${code}: ${usage}`)
@@ -75,8 +76,8 @@
         net_span.innerHTML = ms + 'ms'
 
         // Set span color
-        if (ms > 100) ram_span.style.color = '#dc143c'
-        else if (ms > 15) ram_span.style.color = '#dca314'
-        else ram_span.style.color = 'var(--foreground)'
+        if (ms > 100) net_fg.style.stroke = '#dc143c'
+        else if (ms > 15) net_fg.style.stroke = '#dca314'
+        else net_fg.style.stroke = 'var(--foreground)'
     })
 </script>

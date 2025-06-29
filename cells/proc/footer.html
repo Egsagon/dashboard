@@ -36,6 +36,6 @@
         const min = Math.floor(values[1] / 60)
 
         proc_footer_values[0].innerHTML = values[0]
-        proc_footer_values[1].innerHTML = `${Math.floor(min / 60)}:${min % 60}`
+        proc_footer_values[1].innerHTML = `${Math.floor(min / 60)}:${zfill(min % 60)}`
     })
 </script>

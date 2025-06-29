@@ -4,8 +4,12 @@
 import sys
 import logging
 
-sys.stdout = sys.stderr = open(f'app.log', 'a')
-logging.basicConfig(level = 'INFO', format = '%(levelname)-8s %(name)-6s :: %(message)s')
+sys.stdout = sys.stderr = open(f'app.log', 'a', encoding = 'utf-8')
+logging.basicConfig(
+    level = 'INFO',
+    format = '%(asctime)-17s │ %(levelname)-8s │ %(name)-6s │ %(message)s',
+    datefmt = '%H:%M:%S %d/%m/%y'
+)
 
 # Start server
 import host.server

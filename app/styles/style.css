@@ -90,3 +90,7 @@ body > div > div {
 .button:active {
     background-color: var(--active);
 }
+
+.hidden {
+    display: none !important;
+}

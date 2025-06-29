@@ -37,8 +37,8 @@
 </style>
 
 <script>
-    const zfill = (number, size = 2) => new String(number).padStart(size, '0')    
     const timer_pause = document.querySelector('.cell-timer-timer-header .pause')
+    const timer_cell = document.querySelector('.cell-timer-timer-display')
 
     const timer = {
         interval: null,
@@ -64,7 +64,7 @@
 
             this.value.current = this.value.current - 1
             this.update()
-            if (this.value.current <= 0) {this.stop()}
+            if (this.value.current <= 0) {this.stop(true)}
         },
         start: function(time) {
             // Start timer
@@ -75,7 +75,7 @@
             this.interval = setInterval(this.tick.bind(this), this.resolution)
             this.update()
         },
-        stop: function() {
+        stop: function(alert = false) {
             // Stop the timer and reset timer
 
             clearInterval(this.interval)
@@ -85,7 +85,7 @@
             
             // On end logic
             this.update()
-            alert('Timer end!')
+            if (alert) timer_cell.classList.add('alert')
         },
         pause: function() {
             // Toggle pausing timer
@@ -113,7 +113,10 @@
 
     // Bind header buttons
     timer.update()
-    document.querySelector('.cell-timer-timer-header .pause').onclick = () => {
+    document.querySelector('.cell-timer-timer-header .pause').onclick = timer_cell.onclick = () => {
+        if (timer_cell.classList.contains('alert'))
+            return timer_cell.classList.remove('alert')
+
         if (timer.value.current == timer.value.end) return timer.start(30)
         timer.pause()
     }

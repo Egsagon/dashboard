@@ -18,6 +18,11 @@
     .cell-timer-timer-display > div {
         display: flex;
         flex-direction: column;
+        transition: all ease-in-out .1s;
+    }
+
+    .cell-timer-timer-display > div:active {
+        background-color: var(--active);
     }
 
     .cell-timer-timer-display svg {
@@ -58,5 +63,14 @@
 
     .cell-timer-timer-display span {
         font-size: 2vw;
+    }
+
+    .cell-timer-timer-display.alert > div {
+        animation: alert infinite alternate 1s;
+    }
+
+    @keyframes alert {
+        from { background-color: var(--secondary); }
+        to { background-color: #dc143c; }
     }
 </style>

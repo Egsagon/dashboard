@@ -19,6 +19,7 @@
 </style>
 
 <script>
+    const mouse_icon = document.querySelector('.cell-home-mouse i')
     const mouse_battery = document.querySelector('.cell-home-mouse p')
 
     poll('python scripts/mouse.py', (code, response) => {
@@ -32,8 +33,8 @@
 
         mouse_battery.innerHTML = response + '%'
     
-        if (response < 40) mouse_battery.style.color = '#dca314'
-        if (response < 20) mouse_battery.style.color = '#dc143c'
-        else mouse_battery.style.color = 'var(--foreground)'
+        if (response < 40) mouse_icon.style.color = '#dca314'
+        if (response < 20) mouse_icon.style.color = '#dc143c'
+        else mouse_icon.style.color = 'var(--foreground)'
     })
 </script>

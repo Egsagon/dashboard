@@ -64,6 +64,7 @@
 <script>
     const ram_bar = document.querySelector('.cell-home-stats-ram svg')
     const ram_span = document.querySelector('.cell-home-stats-ram span')
+    const ram_fg = document.querySelector('.cell-home-stats-ram .fg')
 
     poll('[math]::Round((1 - (Get-CimInstance Win32_OperatingSystem).FreePhysicalMemory / (Get-CimInstance Win32_OperatingSystem).TotalVisibleMemorySize) * 100)', (code, usage) => {
         if (code !== 0) return console.error(`Error ${code}: ${usage}`)
@@ -72,9 +73,9 @@
         ram_span.innerHTML = usage + '%'
 
         // Set span color
-        if (usage > 90) ram_span.style.color = '#dc143c'
-        else if (usage > 70) ram_span.style.color = '#dca314'
-        else ram_span.style.color = 'var(--foreground)'
+        if (usage > 90) ram_fg.style.stroke = '#dc143c'
+        else if (usage > 70) ram_fg.style.stroke = '#dca314'
+        else ram_fg.style.stroke = 'var(--foreground)'
 
     })
 </script>
