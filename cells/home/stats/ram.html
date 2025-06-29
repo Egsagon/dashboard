@@ -1,37 +1,35 @@
-<div class="cell-stat-gpu">
+<div class="cell-home-stats-ram">
     <div>
         <svg width="250" height="250" viewBox="0 0 250 250">
             <circle class="bg"></circle>
             <circle class="fg"></circle>
-            <p>GPU<br><span>0%</span></p>
+            <p>RAM<br><span>0%</span></p>
         </svg>
     </div>
 </div>
 
 <style>
-    /* From www.30secondsofcode.org/css/s/circular-progress-bar */
-
-    @property --gpu-progress {
+    @property --ram-progress {
         syntax: "<number>";
         inherits: false;
         initial-value: 0;
     }
 
-    .cell-stat-gpu > div {
+    .cell-home-stats-ram > div {
         display: flex;
         flex-direction: column;
     }
 
-    .cell-stat-gpu svg {
+    .cell-home-stats-ram svg {
         margin: 20px;
         --size: 100%;
         --half-size: calc(var(--size) / 2);
         --radius: calc((var(--size) - 12px) / 2);
         --circumference: calc(var(--radius) * pi * 2);
-        --dash: calc((var(--gpu-progress) * var(--circumference)) / 100);
+        --dash: calc((var(--ram-progress) * var(--circumference)) / 100);
     }
 
-    .cell-stat-gpu svg circle {
+    .cell-home-stats-ram svg circle {
         cx: var(--half-size);
         cy: var(--half-size);
         r: var(--radius);
@@ -40,11 +38,11 @@
         stroke-linecap: round;
     }
     
-    .cell-stat-gpu .bg {
+    .cell-home-stats-ram .bg {
         stroke: var(--active);
     }
 
-    .cell-stat-gpu .fg {
+    .cell-home-stats-ram .fg {
         transform: rotate(-90deg);
         transform-origin: var(--half-size) var(--half-size);
         stroke-dasharray: var(--dash) calc(var(--circumference) - var(--dash));
@@ -52,31 +50,31 @@
         stroke: var(--foreground);
     }
 
-    .cell-stat-gpu p {
+    .cell-home-stats-ram p {
         position: absolute;
         text-align: center;
         font-size: 3.5vw;
     }
 
-    .cell-stat-gpu span {
+    .cell-home-stats-ram span {
         font-size: 2vw;
     }
 </style>
 
 <script>
-    const gpu_bar = document.querySelector('.cell-stat-gpu svg')
-    const gpu_span = document.querySelector('.cell-stat-gpu span')
+    const ram_bar = document.querySelector('.cell-home-stats-ram svg')
+    const ram_span = document.querySelector('.cell-home-stats-ram span')
 
-    poll('nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits', (code, usage) => {
-        if (code !== 0) return console.error(`Error ${code}: ${response}`)
+    poll('[math]::Round((1 - (Get-CimInstance Win32_OperatingSystem).FreePhysicalMemory / (Get-CimInstance Win32_OperatingSystem).TotalVisibleMemorySize) * 100)', (code, usage) => {
+        if (code !== 0) return console.error(`Error ${code}: ${usage}`)
 
-        gpu_bar.style.setProperty('--gpu-progress', usage)
-        gpu_span.innerHTML = usage + '%'
+        ram_bar.style.setProperty('--ram-progress', usage)
+        ram_span.innerHTML = usage + '%'
 
         // Set span color
-        if (usage > 90) gpu_span.style.color = '#dc143c'
-        else if (usage > 70) gpu_span.style.color = '#dca314'
-        else gpu_span.style.color = 'var(--foreground)'
+        if (usage > 90) ram_span.style.color = '#dc143c'
+        else if (usage > 70) ram_span.style.color = '#dca314'
+        else ram_span.style.color = 'var(--foreground)'
 
     })
 </script>

@@ -1,4 +1,4 @@
-<div class="cell-timer-header">
+<div class="cell-timer-timer-header">
     <div>
         <p>Timer</p>
         <button class="pause"></button>
@@ -7,13 +7,13 @@
 </div>
 
 <style>
-    .cell-timer-header p {
+    .cell-timer-timer-header p {
         margin-left: 25px;
         flex-grow: 1;
         font-size: 2vw;
     }
 
-    .cell-timer-header button {
+    .cell-timer-timer-header button {
         all: unset;
         font-size: 2.5vw;
         cursor: pointer;
@@ -27,18 +27,18 @@
         font-family: FontAwesome;
     }
 
-    .cell-timer-header button:active {
+    .cell-timer-timer-header button:active {
         background-color: var(--active);
     }
 
-    .cell-timer-header button:last-child {
+    .cell-timer-timer-header button:last-child {
         margin-right: 20px;
     }
 </style>
 
 <script>
     const zfill = (number, size = 2) => new String(number).padStart(size, '0')    
-    const timer_pause = document.querySelector('.cell-timer-header .pause')
+    const timer_pause = document.querySelector('.cell-timer-timer-header .pause')
 
     const timer = {
         interval: null,
@@ -49,8 +49,8 @@
             paused: true
         },
         display: {
-            text: document.querySelector('.cell-timer-display p'),
-            circle: document.querySelector('.cell-timer-display svg')
+            text: document.querySelector('.cell-timer-timer-display p'),
+            circle: document.querySelector('.cell-timer-timer-display svg')
         },
         update: function() {
             // Update display
@@ -85,6 +85,7 @@
             
             // On end logic
             this.update()
+            alert('Timer end!')
         },
         pause: function() {
             // Toggle pausing timer
@@ -112,9 +113,9 @@
 
     // Bind header buttons
     timer.update()
-    document.querySelector('.cell-timer-header .pause').onclick = () => {
+    document.querySelector('.cell-timer-timer-header .pause').onclick = () => {
         if (timer.value.current == timer.value.end) return timer.start(30)
         timer.pause()
     }
-    document.querySelector('.cell-timer-header .restart').onclick = () => timer.stop()
+    document.querySelector('.cell-timer-timer-header .restart').onclick = () => timer.stop()
 </script>

@@ -1,0 +1,25 @@
+<div class="cell-lock-face">
+    <div><p class="glitch"></p></div>
+</div>
+
+<style>
+    .cell-lock-face p {
+        font-size: 5vw;
+        margin: 0;
+        padding: 0;
+    }
+</style>
+
+<script>
+    const lock_faces = ['ᓚ₍^- .-^₎', '₍ᐢ. .ᐢ₎', '>⩊<', '₍^. .^₎⟆', '(˶ᵔ ᵕ ᵔ˶)']
+    const lock_face_terminal = document.querySelector('.cell-lock-face p')
+
+    const apply_lock_face = () => {
+        let face = lock_faces[Math.floor(Math.random() * lock_faces.length)]
+        lock_face_terminal.title = lock_face_terminal.innerHTML = face
+        lock_face_terminal.style.fontSize = `min(calc(40vw / ${face.length}), 180px)`
+    }
+
+    apply_lock_face()
+    setInterval(apply_lock_face, 40 * 1000)
+</script>

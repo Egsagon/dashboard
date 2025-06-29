@@ -1,0 +1,41 @@
+<div class="cell-proc-footer">
+    <div>
+        <p>Processes <span>0</span></p>
+        <p>Uptime <span>00:00</span></p>
+    </div>
+</div>
+
+<style>
+    .cell-proc-footer div {
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+    .cell-proc-footer p {
+        font-size: 2vw;
+        color: var(--tiercary);
+    }
+
+    .cell-proc-footer span {
+        font-size: 4vw;
+    }
+</style>
+
+<script>
+    const proc_footer_command = [
+        '(Get-Process).Count',
+        '(Get-Date) - (gcim Win32_OperatingSystem).LastBootUpTime | Select-Object -ExpandProperty TotalSeconds'
+    ].join(';')
+
+    const proc_footer_values = document.querySelectorAll('.cell-proc-footer span')
+
+    poll(proc_footer_command, (code, response) => {
+        if (code !== 0) return console.error(`Error ${code}: ${response}`)
+
+        let values = response.split('\n')
+        const min = Math.floor(values[1] / 60)
+
+        proc_footer_values[0].innerHTML = values[0]
+        proc_footer_values[1].innerHTML = `${Math.floor(min / 60)}:${min % 60}`
+    })
+</script>

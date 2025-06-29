@@ -1,13 +1,15 @@
-<div class="cell-button-sleep">
+<div class="cell-home-buttons-sleep">
     <div>
         <button class="button"><i class="fa-solid fa-moon"></i></button>
     </div>
 </div>
 
 <script>
-    document.querySelector('.cell-button-sleep button').onclick = () => {
+    document.querySelector('.cell-home-buttons-sleep button').onclick = () => {
         exec('rundll32.exe user32.dll,LockWorkStation', (code, response) => {
             if (code !== 0 && response) return console.error(`Error ${code}: ${response}`)
+
+            location.href = '/?b=l'
         })
     }
 </script>

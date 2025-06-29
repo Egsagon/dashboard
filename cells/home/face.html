@@ -1,9 +1,9 @@
-<div class="cell-display-face">
+<div class="cell-home-face">
     <div><p class="glitch"></p></div>
 </div>
 
 <style>
-    .cell-display-face p {
+    .cell-home-face p {
         font-size: 5vw;
         margin: 0;
         padding: 0;
@@ -18,14 +18,14 @@
         high: ['>⩊<', '(つ╥﹏╥)つ', '(˶˃⤙˂˶)', '(×_×)', ':(', '(ó﹏ò｡)', '(ᵕ—ᴗ—)']
     }
 
-    const face_terminal = document.querySelector('.cell-display-face p')
+    const face_terminal = document.querySelector('.cell-home-face p')
 
     const apply_face = () => {
         // Choose a face randomly, with consideration for RAM load and time
         // Warning: RAM module must be running for this to work
 
         let time = new Date().getHours()
-        let load = document.querySelector('.cell-stat-ram span').innerHTML.replace('%', '')
+        let load = document.querySelector('.cell-home-stats-ram span').innerHTML.replace('%', '')
 
         let batch = faces.sleep
         if      (load > 70) batch = faces.high
@@ -41,4 +41,5 @@
 
     apply_face()
     setInterval(apply_face, 40 * 1000)
+    document.querySelector('.cell-home-face').onclick = apply_face
 </script>

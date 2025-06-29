@@ -1,11 +1,11 @@
-<div class="cell-ru-keyboard">
+<div class="cell-keyboard-russian">
     <div>
         <button class="button">Caps</button>
     </div>
 </div>
 
 <style>
-    .cell-ru-keyboard button, .ru-key button {
+    .cell-keyboard-russian button, .ru-key button {
         font-size: 4vw;
     }
 
@@ -56,7 +56,7 @@
         })
     }))
 
-    document.querySelector('.cell-ru-keyboard button').onclick = () => {
+    document.querySelector('.cell-keyboard-russian button').onclick = () => {
         for (const key of document.querySelectorAll('.ru-key button p')) {
             let lower = key.innerHTML.toLowerCase()
             if (key.innerHTML === lower)

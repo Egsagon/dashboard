@@ -1,4 +1,4 @@
-<div class="cell-stat-net">
+<div class="cell-home-stats-net">
     <div>
         <svg width="250" height="250" viewBox="0 0 250 250">
             <circle class="bg"></circle>
@@ -9,20 +9,18 @@
 </div>
 
 <style>
-    /* From www.30secondsofcode.org/css/s/circular-progress-bar */
-
     @property --net-progress {
         syntax: "<number>";
         inherits: false;
         initial-value: 0;
     }
 
-    .cell-stat-net > div {
+    .cell-home-stats-net > div {
         display: flex;
         flex-direction: column;
     }
 
-    .cell-stat-net svg {
+    .cell-home-stats-net svg {
         margin: 20px;
         --size: 100%;
         --half-size: calc(var(--size) / 2);
@@ -31,7 +29,7 @@
         --dash: calc((var(--net-progress) * var(--circumference)) / 100);
     }
 
-    .cell-stat-net svg circle {
+    .cell-home-stats-net svg circle {
         cx: var(--half-size);
         cy: var(--half-size);
         r: var(--radius);
@@ -40,11 +38,11 @@
         stroke-linecap: round;
     }
     
-    .cell-stat-net .bg {
+    .cell-home-stats-net .bg {
         stroke: var(--active);
     }
 
-    .cell-stat-net .fg {
+    .cell-home-stats-net .fg {
         transform: rotate(-90deg);
         transform-origin: var(--half-size) var(--half-size);
         stroke-dasharray: var(--dash) calc(var(--circumference) - var(--dash));
@@ -52,23 +50,23 @@
         stroke: var(--foreground);
     }
 
-    .cell-stat-net p {
+    .cell-home-stats-net p {
         position: absolute;
         text-align: center;
         font-size: 3.5vw;
     }
 
-    .cell-stat-net span {
+    .cell-home-stats-net span {
         font-size: 2vw;
     }
 </style>
 
 <script>
-    const net_bar = document.querySelector('.cell-stat-net svg')
-    const net_span = document.querySelector('.cell-stat-net span')
+    const net_bar = document.querySelector('.cell-home-stats-net svg')
+    const net_span = document.querySelector('.cell-home-stats-net span')
 
     poll("ping 1.1.1.1 -n 1", (code, usage) => {
-        if (code !== 0) return console.error(`Error ${code}: ${response}`)
+        if (code !== 0) return console.error(`Error ${code}: ${usage}`)
 
         let ms = new Number(/time=(\d+)ms/g.exec(usage)[1])
         let percentage = Math.max(0, 100 - 10 * (ms / 2))

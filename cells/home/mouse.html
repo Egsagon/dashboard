@@ -1,4 +1,4 @@
-<div class="cell-mouse">
+<div class="cell-home-mouse">
     <div>
         <i class="fa-solid fa-computer-mouse"></i>
         <p>0%</p>
@@ -6,12 +6,12 @@
 </div>
 
 <style>
-    .cell-mouse div {
+    .cell-home-mouse div {
         font-size: 5vw;
         flex-direction: column;
     }
 
-    .cell-mouse p {
+    .cell-home-mouse p {
         margin: 0;
         margin-top: 10px;
         font-size: 2vw;
@@ -19,7 +19,7 @@
 </style>
 
 <script>
-    const mouse_battery = document.querySelector('.cell-mouse p')
+    const mouse_battery = document.querySelector('.cell-home-mouse p')
 
     poll('python scripts/mouse.py', (code, response) => {
         if (code !== 0) return console.error(`Error ${code}: ${response}`)

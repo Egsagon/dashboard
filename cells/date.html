@@ -1,19 +1,19 @@
-<div class="cell-display-date">
+<div class="cell-date">
     <div></div>
 </div>
 
 <style>
-    .cell-display-date div {
+    .cell-date div {
         display: flex;
         flex-direction: column;
     }
 
-    .cell-display-date p:first-child {
+    .cell-date p:first-child {
         font-size: 5vw;
         margin: 5px;
     }
     
-    .cell-display-date p:last-child {
+    .cell-date p:last-child {
         font-size: 2vw;
         margin: 5px;
     }
@@ -22,6 +22,6 @@
 <script>
     poll('Get-Date -Format "<p>HH:mm</p><p>ddd d, MMM</p>"', (code, date) => {
         if (code !== 0) return console.error(`Error ${code}: ${date}`)
-        document.querySelector('.cell-display-date div').innerHTML = date
+        document.querySelector('.cell-date div').innerHTML = date
     })
 </script>

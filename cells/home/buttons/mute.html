@@ -1,11 +1,11 @@
-<div class="cell-button-ds-mute">
+<div class="cell-home-buttons-mute">
     <div>
         <button class="button"><i class="fa-solid fa-microphone"></i></button>
     </div>
 </div>
 
 <script>
-    document.querySelector('.cell-button-ds-mute button').onclick = () => {
+    document.querySelector('.cell-home-buttons-mute button').onclick = () => {
         exec('& "C:/Program Files/AutoHotkey/v2/AutoHotkey.exe" scripts/key.ahk "!v"', (code, response) => {
             if (code !== 0 && response) return console.error(`Error ${code}: ${response}`)
         })

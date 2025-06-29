@@ -1,0 +1,59 @@
+<div class="cell-proc-display">
+    <div>
+        <div class="header"><p>Process</p><p>CPU</p><p>RAM</p></div>
+        <div class="content"></div>
+    </div>
+</div>
+
+<style>
+    .cell-proc-display > div {
+        flex-direction: column;
+    }
+
+    .cell-proc-display > div > div {
+        width: 100%;
+    }
+
+    .cell-proc-display .content {
+        border-top: 2px solid var(--background);
+        overflow-y: scroll;
+        flex-grow: 1;
+    }
+
+    .cell-proc-display .content div, .cell-proc-display .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        font-size: 2vw;
+        margin-top: 10px;
+    }
+
+    .cell-proc-display p {
+        width: 33%;
+        text-align: center;
+    }
+</style>
+
+<script>
+    const proc_table = document.querySelector('.cell-proc-display .content')
+    const proc_count = 30 // Max process count
+    const proc_command = `
+        Get-Process | Group-Object Name | ForEach-Object {
+            [PSCustomObject]@{
+                Name  = $_.Name
+                CPU   = ($_.Group | Measure-Object CPU -Sum).Sum
+                RAM   = [math]::Round(($_.Group | Measure-Object WorkingSet64 -Sum).Sum / 1MB, 2)
+            }
+        } | Sort-Object RAM -Descending | Select-Object -First ${proc_count} | ConvertTo-Csv -NoTypeInformation | Select-Object -Skip 1
+    `
+
+    poll(proc_command, (code, response) => {
+        if (code !== 0) return console.error(`Error ${code}: ${response}`)
+
+        let html_processes = []
+        for (const process of response.replace(/"/g, '').split('\n'))
+            html_processes.push('<p>' + process.split(',').join('</p><p>') +'</p>')
+
+        proc_table.innerHTML = '<div>' + html_processes.join('</div><div>') + '</div>'
+    })
+</script>

@@ -1,11 +1,11 @@
-<div class="cell-button-pause">
+<div class="cell-home-buttons-pause">
     <div>
         <button class="button"><i class="fa-solid fa-play"></i></button>
     </div>
 </div>
 
 <script>
-    document.querySelector('.cell-button-pause button').onclick = () => {
+    document.querySelector('.cell-home-buttons-pause button').onclick = () => {
         exec('& "C:/Program Files/AutoHotkey/v2/AutoHotkey.exe" scripts/key.ahk "{Media_Play_Pause}"', (code, response) => {
             if (code !== 0 && response) return console.error(`Error ${code}: ${response}`)
         })

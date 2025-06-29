@@ -41,52 +41,52 @@ styles:
     gradient: 'linear-gradient(-65deg, #fd575a, #fc8151, #f9b931, #f9b931)'
 
 # CSS variables to override
-css: *style-light
+css: *style-default
 
 boards:
   h:
     name: Main
 
     modules:
-      - name: display/date
+      - name: date
         geometry: 4x2,1+1
-      - name: button/sleep
+      - name: home/buttons/sleep
         geometry: 2x2,5+1
-      - name: display/dot
+      - name: home/dot
         geometry: 2x2,7+1
       
-      - name: stat/cpu
+      - name: home/stats/cpu
         geometry: 2x2,1+3
-      - name: stat/ram
+      - name: home/stats/ram
         geometry: 2x2,3+3
-      - name: stat/gpu
+      - name: home/stats/gpu
         geometry: 2x2,5+3
-      - name: stat/net
+      - name: home/stats/net
         geometry: 2x2,7+3
       
-      - name: stat/temp
+      - name: home/stats/temp
         geometry: 2x4,1+5
-      - name: display/face
+      - name: home/face
         geometry: 4x4,3+5
-      - name: mouse
+      - name: home/mouse
         geometry: 2x2,7+5
-      - name: keyboard
+      - name: home/keyboard
         geometry: 2x2,7+7
       
-      - name: button/pause
+      - name: home/buttons/pause
         geometry: 2x2,1+9
-      - name: button/like
+      - name: home/buttons/like
         geometry: 2x2,3+9
-      - name: button/ds-mute
+      - name: home/buttons/mute
         geometry: 2x2,5+9
-      - name: button/ds-deafen
+      - name: home/buttons/deafen
         geometry: 2x2,7+9
       
       - name: link/home
         geometry: 2x2,1+11
       - name: link/timer
         geometry: 2x2,3+11
-      - name: link/mail
+      - name: link/proc
         geometry: 2x2,5+11
       - name: link/russian
         geometry: 2x2,7+11
@@ -95,55 +95,60 @@ boards:
     name: Timer
 
     modules:
-      - name: display/date
+      - name: date
         geometry: 8x2,1+1
       
-      - name: timer/display
+      - name: timer/timer/display
         geometry: 4x4,5+3
-      - name: timer/header
+      - name: timer/timer/header
         geometry: 4x1,1+3
-      - name: timer/bubble
+      - name: timer/timer/bubble
         geometry: 2x1,1+4
         data: 30
-      - name: timer/bubble
+      - name: timer/timer/bubble
         geometry: 2x1,3+4
         data: 60
-      - name: timer/bubble
+      - name: timer/timer/bubble
         geometry: 2x1,1+5
         data: 600
-      - name: timer/bubble
+      - name: timer/timer/bubble
         geometry: 2x1,3+5
         data: 1800
-      - name: timer/bubble
+      - name: timer/timer/bubble
         geometry: 2x1,1+6
         data: 3600
-      - name: timer/bubble
+      - name: timer/timer/bubble
         geometry: 2x1,3+6
         data: 7200
 
-      - name: crono/display
+      - name: timer/crono/display
         geometry: 4x4,1+7
-      - name: crono/header
+      - name: timer/crono/header
         geometry: 4x4,5+7
       
       - name: link/home
         geometry: 2x2,1+11
       - name: link/timer
         geometry: 2x2,3+11
-      - name: link/mail
+      - name: link/proc
         geometry: 2x2,5+11
       - name: link/russian
         geometry: 2x2,7+11
   
-  m:
-    name: Mails
+  p:
+    name: Processes
 
     modules:
+      - name: proc/display
+        geometry: 8x8,1+1
+      - name: proc/footer
+        geometry: 8x2,1+9
+
       - name: link/home
         geometry: 2x2,1+11
       - name: link/timer
         geometry: 2x2,3+11
-      - name: link/mail
+      - name: link/proc
         geometry: 2x2,5+11
       - name: link/russian
         geometry: 2x2,7+11
@@ -152,17 +157,29 @@ boards:
     name: Russian
 
     modules:
-      - name: ru-header
+      - name: keyboard/header
         geometry: 6x2,1+1
-      - name: ru-keyboard
+      - name: keyboard/russian
         geometry: 2x2,7+1
+      
       - name: link/home
         geometry: 2x2,1+11
       - name: link/timer
         geometry: 2x2,3+11
-      - name: link/mail
+      - name: link/proc
         geometry: 2x2,5+11
       - name: link/russian
         geometry: 2x2,7+11
+
+  l:
+    name: Lock
+
+    modules:
+      # - name: date
+      #   geometry: 4x2,3+3
+      - name: lock/face
+        geometry: 4x4,3+5
+      - name: lock/unlock
+        geometry: 4x1,3+9
 
 # EOF

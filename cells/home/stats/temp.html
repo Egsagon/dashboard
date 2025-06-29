@@ -1,4 +1,4 @@
-<div class="cell-stat-temp">
+<div class="cell-home-stats-temp">
     <div>
         <div class="ball"><div></div></div>
         <div class="bar"><div></div></div>
@@ -7,17 +7,17 @@
 </div>
 
 <style>
-    .cell-stat-temp > div {
+    .cell-home-stats-temp > div {
         flex-direction: column;
     }
 
-    .cell-stat-temp p {
+    .cell-home-stats-temp p {
         font-size: 2vw;
         margin-top: 25px;
         margin-bottom: 0;
     }
 
-    .cell-stat-temp .ball {
+    .cell-home-stats-temp .ball {
         width: 50px;
         height: 50px;
         border-radius: 50px;
@@ -25,7 +25,7 @@
         overflow: hidden;
     }
 
-    .cell-stat-temp .bar {
+    .cell-home-stats-temp .bar {
         width: 20px;
         border-radius: 0 0 10px 10px;
         height: calc(100% - 160px);
@@ -34,7 +34,7 @@
         transform: translateY(-3px);
     }
 
-    .cell-stat-temp .ball div {
+    .cell-home-stats-temp .ball div {
         width: 50px;
         height: 0%;
         border-radius: 0 0 2px 2px;
@@ -46,7 +46,7 @@
         transition: all ease-in-out 1s;
     }
 
-    .cell-stat-temp .bar div {
+    .cell-home-stats-temp .bar div {
         width: 20px;
         height: 0%;
         border-radius: 0 0 10px 10px;
@@ -57,9 +57,9 @@
 
 <script>
     const temp_cell = {
-        ball: document.querySelector('.cell-stat-temp .ball div').style,
-        bar: document.querySelector('.cell-stat-temp .bar div').style,
-        text: document.querySelector('.cell-stat-temp p')
+        ball: document.querySelector('.cell-home-stats-temp .ball div').style,
+        bar: document.querySelector('.cell-home-stats-temp .bar div').style,
+        text: document.querySelector('.cell-home-stats-temp p')
     }
 
     poll('nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits', (code, response) => {
