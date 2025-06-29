@@ -1,27 +1,21 @@
-import socket
+# This script was designed to be run by pythonw.exe in
+# the Task Scheduler, hence the pipe redirection.
+
+import sys
 import logging
+
+sys.stdout = sys.stderr = open(f'app.log', 'a')
+logging.basicConfig(level = 'INFO', format = '%(levelname)-8s %(name)-6s :: %(message)s')
+
+# Start server
 import host.server
-
-PORT = 8808
-
-logging.basicConfig(
-    level = 'INFO',
-    format = '%(levelname)-8s %(name)-6s :: %(message)s'
-)
-
-# Get local IP
-conn = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-conn.connect(('1.1.1.1', 80))
-ip = conn.getsockname()[0]
-conn.close()
-
-logging.info(f'Server running on https://{ip}:{PORT}')
+logging.info(f'Starting server')
 
 host.server.socket.run(
     app = host.server.app,
     debug = False,
     host = '0.0.0.0',
-    port = PORT,
+    port = host.server.utils.config['port'],
     certfile = 'cert/cert.pem',
     keyfile = 'cert/key.pem'
 )

@@ -9,6 +9,7 @@ width: 8
 # Especially if you don't trust your
 # provider
 token: blob
+port: 8808
 
 styles:
   default: &style-default
