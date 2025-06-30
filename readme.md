@@ -2,6 +2,8 @@
 
 A simple local dashboard webapp, designed to fit on a tablet.
 
+![](https://github.com/Egsagon/dashboard/blob/03668d4807589cfd02bdaeea28acd256b3e84005/demo.png)
+
 ## Installation
 
 - Clone the repo
