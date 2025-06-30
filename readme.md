@@ -6,13 +6,17 @@ A simple local dashboard webapp, designed to fit on a tablet.
 
 ## Installation
 
+> [WARNING]
+> This project is configured for me only.
+> You have to change stuff to make it work on your end.
+
 - Clone the repo
 - Install python dependencies: `pip install flask flask-socketio eventlet pyyaml`
 - Some included modules require additional software:
-    - cells/home/buttons/* & cells/keyboard/*:
-        - Requires AHK 3+
-    - cells/home/mouse
-        - `pip install pywinusb`
+    - cells/home/buttons/* & cells/keyboard/*: Requires AHK2
+    - cells/home/mouse: Requires PyWinUSB
+    - cells/home/stats/gpu & temp: Requires Nvidia SMI
+
 - Create a SSL certificate inside /cert/.
 
 ## Starting up
