@@ -10,4 +10,4 @@ Get-Process | Group-Object Name | ForEach-Object {
         CPU = if ($totalCPU -ne 0) { [math]::Round(($cpuSum / $totalCPU) * 100) } else { 0 }
         RAM = if ($totalRAM -ne 0) { [math]::Round(($ramSum / $totalRAM) * 100) } else { 0 }
     }
-} | Sort-Object RAM -Descending | Select-Object -First 30 | ConvertTo-Csv -NoTypeInformation | Select-Object -Skip 1
+} | Sort-Object CPU -Descending | Select-Object -First 30 | ConvertTo-Csv -NoTypeInformation | Select-Object -Skip 1
