@@ -6,7 +6,7 @@ A simple local dashboard webapp, designed to fit on a tablet.
 
 ## Installation
 
-> [WARNING]
+> ![WARNING]
 > This project is configured for me only.
 > You have to change stuff to make it work on your end.
 
