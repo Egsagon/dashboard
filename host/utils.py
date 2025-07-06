@@ -75,9 +75,6 @@ def run(command: str) -> list[int, str]:
         if capture and frame - capture[0] < config['refresh_rate'] * int(cache):
             return capture[1]
     
-    if cached:
-        print('REFRESHING CACHE')
-
     response = _run(command)
 
     if cached:
@@ -89,6 +86,8 @@ def poller(sid: str, tasks: dict[int, str], callback: callable) -> None:
     '''
     Create an eventlet shell poll.
     '''
+
+    logger.info(f'Registering commands: {tasks}')
 
     if event := polls.get(sid):
         logger.info(f'Killing precedant poller for {sid}')
