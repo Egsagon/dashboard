@@ -84,7 +84,7 @@ def execute(command: str):
     return utils.eventlet.tpool.execute(utils.run, command)
 
 @socket.on('disconnect')
-def cleanup():
+def cleanup(_):
     # Cleanup poll on disconnect
 
     if event := utils.polls.get(flask.request.sid):
