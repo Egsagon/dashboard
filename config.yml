@@ -129,9 +129,9 @@ boards:
         geometry: 2x1,3+6
         data: 7200
 
-      - name: timer/crono/display
+      - name: timer/chrono/display
         geometry: 4x4,1+7
-      - name: timer/crono/header
+      - name: timer/chrono/header
         geometry: 4x4,5+7
       
       - name: link/home

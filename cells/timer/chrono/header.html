@@ -1,7 +1,7 @@
-<div class="cell-timer-crono-header">
+<div class="cell-timer-chrono-header">
     <div>
         <div id="header">
-            <p>Crono</p>
+            <p>Chrono</p>
             <button class="pause"></button>
             <button class="lap"><i class="fa-solid fa-bookmark"></i></button>
             <button class="restart"><i class="fa-solid fa-rotate-left"></i></button>
@@ -12,39 +12,39 @@
 </div>
 
 <style>
-    .cell-timer-crono-header > div {
+    .cell-timer-chrono-header > div {
         flex-direction: column;
         overflow: hidden;
     }
 
-    .cell-timer-crono-header > div > div {
+    .cell-timer-chrono-header > div > div {
         width: 100%;
     }
 
-    .cell-timer-crono-header #header {
+    .cell-timer-chrono-header #header {
         display: flex;
         align-items: center;
         justify-content: center;
         padding: 7px;
     }
 
-    .cell-timer-crono-header #header p {
+    .cell-timer-chrono-header #header p {
         flex-grow: 1;
         font-size: 2vw;
         margin-left: 25px;
     }
 
-    .cell-timer-crono-header #header button:last-child {
+    .cell-timer-chrono-header #header button:last-child {
         margin-right: 15px;
     }
 
-    .cell-timer-crono-header #laps {
+    .cell-timer-chrono-header #laps {
         flex-grow: 1;
         border-top: 2px solid var(--active);
         overflow-y: scroll;
     }
 
-    .cell-timer-crono-header #laps:empty:after {
+    .cell-timer-chrono-header #laps:empty:after {
         content: 'No laps';
         display: block;
         text-align: center;
@@ -52,7 +52,7 @@
         font-size: 2vw;
     }
 
-    .cell-timer-crono-header #laps div {
+    .cell-timer-chrono-header #laps div {
         margin: 10px;
         padding: 10px;
         margin-bottom: 0;
@@ -64,11 +64,11 @@
         justify-content: space-between;
     }
 
-    .cell-timer-crono-header #laps div:last-child {
+    .cell-timer-chrono-header #laps div:last-child {
         border-bottom: none;
     }
 
-    .cell-timer-crono-header button {
+    .cell-timer-chrono-header button {
         all: unset;
         font-size: 2.5vw;
         cursor: pointer;
@@ -82,31 +82,31 @@
         font-family: FontAwesome;
     }
 
-    .cell-timer-crono-header button:active {
+    .cell-timer-chrono-header button:active {
         background-color: var(--active);
     }
 
 </style>
 
 <script>
-    const crono_pause = document.querySelector('.cell-timer-crono-header .pause')
-    const crono_laps = document.querySelector('.cell-timer-crono-header #laps')
+    const chrono_pause = document.querySelector('.cell-timer-chrono-header .pause')
+    const chrono_laps = document.querySelector('.cell-timer-chrono-header #laps')
 
-    const crono = {
+    const chrono = {
         interval: null,
         resolution: 1000,
         value: 0,
         paused: true,
         display: {
-            text: document.querySelector('.cell-timer-crono-display p'),
-            circle: document.querySelector('.cell-timer-crono-display svg')
+            text: document.querySelector('.cell-timer-chrono-display p'),
+            circle: document.querySelector('.cell-timer-chrono-display svg')
         },
         update: function() {
             // Update display
 
             this.display.text.innerHTML = timer.pretty(this.value, true)
-            this.display.circle.style.setProperty('--crono-progress', (this.value % 60 / 60) * 100)
-            crono_pause.innerHTML = this.paused || !this.interval ? '' : ''
+            this.display.circle.style.setProperty('--chrono-progress', (this.value % 60 / 60) * 100)
+            chrono_pause.innerHTML = this.paused || !this.interval ? '' : ''
         },
         tick: function() {
             // Tick time
@@ -119,7 +119,7 @@
             this.interval = setInterval(this.tick.bind(this), this.resolution)
         },
         stop: function() {
-            // Stop crono
+            // Stop chrono
 
             clearInterval(this.interval)
             this.value = 0
@@ -127,7 +127,7 @@
             this.update()
         },
         pause: function() {
-            // Toggle pausing crono
+            // Toggle pausing chrono
 
             this.paused = !this.paused
 
@@ -139,19 +139,19 @@
         }
     }
 
-    crono_pause.onclick = document.querySelector('.cell-timer-crono-display').onclick = () => {
-        if (!crono.interval) return crono.start()
-        crono.pause()
+    chrono_pause.onclick = document.querySelector('.cell-timer-chrono-display').onclick = () => {
+        if (!chrono.interval) return chrono.start()
+        chrono.pause()
     }
 
-    document.querySelector('.cell-timer-crono-header .lap').onclick = () => {
+    document.querySelector('.cell-timer-chrono-header .lap').onclick = () => {
         const lap_number = 1
-        const lap_time = timer.pretty(crono.value, true)
-        crono_laps.innerHTML += `<div>Lap ${lap_number} <span>${lap_time}</span></div>`
+        const lap_time = timer.pretty(chrono.value, true)
+        chrono_laps.innerHTML += `<div>Lap ${lap_number} <span>${lap_time}</span></div>`
     }
 
-    document.querySelector('.cell-timer-crono-header .restart').onclick = () => {
-        crono.stop()
-        crono_laps.innerHTML = ''
+    document.querySelector('.cell-timer-chrono-header .restart').onclick = () => {
+        chrono.stop()
+        chrono_laps.innerHTML = ''
     }
 </script>
