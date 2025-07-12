@@ -49,7 +49,7 @@ styles:
     active: '#1f143a'
 
 # CSS variables to override
-css: *style-focus
+css: *style-default
 
 boards:
   h:

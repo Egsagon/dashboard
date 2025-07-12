@@ -66,9 +66,12 @@
     const gpu_span = document.querySelector('.cell-home-stats-gpu span')
     const gpu_fg = document.querySelector('.cell-home-stats-gpu .fg')
 
+    var open_stat_gpu = 0
+
     poll('nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits', (code, usage) => {
         if (code !== 0) return console.error(`Error ${code}: ${usage}`)
 
+        open_stat_gpu = usage
         gpu_bar.style.setProperty('--gpu-progress', usage)
         gpu_span.innerHTML = usage + '%'
 

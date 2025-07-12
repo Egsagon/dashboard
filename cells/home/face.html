@@ -12,26 +12,26 @@
 
 <script>
     const faces = {
-        sleep: ['ᓚ₍^- .-^₎', '₍ᐢ. .ᐢ₎', '>⩊<', '₍^. .^₎⟆', '(˶ᵔ ᵕ ᵔ˶)', '(っᵔ◡ᵔ)っ'],
-        light: ['>⩊<', '(っᵔ◡ᵔ)っ', '(˶˃⤙˂˶)', '＼(＾O＾)／', '\( ﾟヮﾟ)/'],
-        mean: ['>⩊<', '(≖_≖ )', '(ᵕ—ᴗ—)', '(-_-)', 'ᗜ⩊ᗜ', '(˶˃⤙˂˶)', '(っᵔ◡ᵔ)っ'],
-        high: ['>⩊<', '(つ╥﹏╥)つ', '(˶˃⤙˂˶)', '(×_×)', '(ó﹏ò｡)', '(ᵕ—ᴗ—)']
+        sleep: ['ᓚ₍^- .-^₎', '₍ᐢ. .ᐢ₎', '₍^. .^₎⟆', '(˶ᵔ ᵕ ᵔ˶)', '(っᵔ◡ᵔ)っ'],
+        light: ['>⩊<', '(っᵔ◡ᵔ)っ', '(˶˃⤙˂˶)', '＼(＾O＾)／', '\\( ﾟヮﾟ)/'],
+        mean: ['>⩊<', '(≖_≖ )', '(ᵕ—ᴗ—)', '(˶˃⤙˂˶)', '(っᵔ-ᵔ)っ'],
+        high: ['(つ╥﹏╥)つ', '(˶˃⤙˂˶)', '(×_×)', '(ó﹏ò｡)', '(ᵕ—ᴗ—)']
     }
 
     const face_terminal = document.querySelector('.cell-home-face p')
 
     const apply_face = () => {
-        // Choose a face randomly, with consideration for RAM load and time
-        // Warning: RAM module must be running for this to work
-
-        let time = new Date().getHours()
-        let load = document.querySelector('.cell-home-stats-ram span').innerHTML.replace('%', '')
+        // Choose a face randomly
+        // Warning: Requires RAM, CPU and GPU modules
+        
+        const time = new Date().getHours()
+        const load = Math.max(open_stat_ram, open_stat_cpu, open_stat_gpu)
 
         let batch = faces.sleep
         if      (load > 70) batch = faces.high
         else if (load > 55) batch = faces.mean
         else if (load > 15) batch = faces.light
-        if (load < 65 && (time >= 22 || time < 7)) batch = faces.sleep
+        if (load < 65 && time < 9) batch = faces.sleep
 
         // Select random face from that batch
         let face = batch[Math.floor(Math.random() * batch.length)]

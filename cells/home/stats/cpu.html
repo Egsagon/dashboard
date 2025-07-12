@@ -66,9 +66,12 @@
     const cpu_span = document.querySelector('.cell-home-stats-cpu span')
     const cpu_fg = document.querySelector('.cell-home-stats-cpu .fg')
 
+    var open_stat_cpu = 0
+
     poll('(Get-CimInstance -ClassName Win32_Processor).LoadPercentage', (code, usage) => {
         if (code !== 0) return console.error(`Error ${code}: ${usage}`)
 
+        open_stat_cpu = usage
         cpu_bar.style.setProperty('--cpu-progress', usage)
         cpu_span.innerHTML = usage + '%'
 

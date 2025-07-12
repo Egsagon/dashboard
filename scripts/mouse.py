@@ -5,7 +5,7 @@ import pywinusb.hid as hid
 
 TIMEOUT = 1.5 # 1.5 seconds timeout 
 
-PATH = '\\\\?\\HID#VID_3434&PID_D038&MI_03#8&6ea2069&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}'
+PATH = '\\\\?\\hid#vid_3434&pid_d038&mi_03#7&3b030a9f&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}'
 
 BUFFER = [0] * 65
 BUFFER[1] = 65

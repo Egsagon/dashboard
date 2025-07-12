@@ -66,9 +66,12 @@
     const ram_span = document.querySelector('.cell-home-stats-ram span')
     const ram_fg = document.querySelector('.cell-home-stats-ram .fg')
 
+    var open_stat_ram = 0
+
     poll('[math]::Round((1 - (Get-CimInstance Win32_OperatingSystem).FreePhysicalMemory / (Get-CimInstance Win32_OperatingSystem).TotalVisibleMemorySize) * 100)', (code, usage) => {
         if (code !== 0) return console.error(`Error ${code}: ${usage}`)
 
+        open_stat_ram = usage
         ram_bar.style.setProperty('--ram-progress', usage)
         ram_span.innerHTML = usage + '%'
 
